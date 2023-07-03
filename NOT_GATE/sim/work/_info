@@ -4,7 +4,6 @@ K3
 cModel Technology
 Z0 dC:\altera\13.1\butcamp\sim
 vand_gate
-!i10b 1
 Z1 !s100 n>b8dZc^PTGg6M0M;8=fI3
 Z2 I?P:I76C6VhRh@gA<nVi1l2
 Z3 Veh:LPnmcXIkSU1hN5DkW@3
@@ -15,67 +14,68 @@ Z7 F../src/RTL/and_gate.v
 L0 1
 Z8 OV;L;10.1d;51
 r1
-!s85 0
 31
 Z9 !s108 1688362245.710000
 Z10 !s107 ../Testbench/testbench2.v|../src/RTL/and_gate.v|
 Z11 !s90 -reportprogress|300|-f|run.f|
-!s101 -O0
 o-O0
+!i10b 1
+!s85 0
+!s101 -O0
 vnot_gate
-Z12 !s100 iUz2>mZ8Dn@XV4BW6l]U`1
-Z13 I8U@dCOSUbD_Z=ndQQP0kP1
-Z14 V4E4EDUVNdKMQmHPAFP[A_2
-R4
-Z15 w1688361224
-Z16 8../src/RTL/not.v
-Z17 F../src/RTL/not.v
+!i10b 1
+!s100 V]CR@I^co]V]=0XGa1JoV3
+IhS]3z6hVC6lbIjLoS[d6h1
+Z12 V4E4EDUVNdKMQmHPAFP[A_2
+Z13 dC:\summer_bootcamp_2023\NOT_GATE\sim
+Z14 w1688361224
+8../src/RTL/not_gate.v
+F../src/RTL/not_gate.v
 L0 1
 R8
 r1
-31
-Z18 !s108 1688362072.753000
-Z19 !s107 ../Testbench/testbench2.v|../src/RTL/not.v|
-R11
-o-O0
-!i10b 1
 !s85 0
+31
+Z15 !s108 1688364425.936000
+Z16 !s107 ../Testbench/testbench.v|../src/RTL/not_gate.v|
+R11
 !s101 -O0
+o-O0
 vtestbench
-Z20 I1`g^P5Ok4]TBzzcd5DoNG0
-Z21 VhGfW:390DM[oDMzegDH9`2
-R4
-Z22 w1688361572
-Z23 8../Testbench/testbench.v
-Z24 F../Testbench/testbench.v
+!i10b 1
+Z17 !s100 jlXE<dS0<`?iBOLICd[0g1
+Z18 I1`g^P5Ok4]TBzzcd5DoNG0
+Z19 VhGfW:390DM[oDMzegDH9`2
+R13
+w1688364272
+Z20 8../Testbench/testbench.v
+Z21 F../Testbench/testbench.v
 L0 1
 R8
 r1
+!s85 0
 31
-Z25 !s108 1688361582.603000
-Z26 !s107 ../Testbench/testbench.v|../src/RTL/not.v|
+R15
+R16
 R11
-o-O0
-Z27 !s100 jlXE<dS0<`?iBOLICd[0g1
-!i10b 1
-!s85 0
 !s101 -O0
+o-O0
 vtestbench2
-!i10b 1
-Z28 !s100 >9z=Jbc`N^Y[36NINeInn0
-Z29 ILlLgU_L:@G3Jm3NG:`U[43
-Z30 V<WjIFPfEhdLN6;1kTlCRZ3
+Z22 !s100 >9z=Jbc`N^Y[36NINeInn0
+Z23 ILlLgU_L:@G3Jm3NG:`U[43
+Z24 V<WjIFPfEhdLN6;1kTlCRZ3
 R4
-Z31 w1688361962
-Z32 8../Testbench/testbench2.v
-Z33 F../Testbench/testbench2.v
+Z25 w1688361962
+Z26 8../Testbench/testbench2.v
+Z27 F../Testbench/testbench2.v
 L0 1
 R8
 r1
-!s85 0
 31
 R9
 R10
 R11
-!s101 -O0
 o-O0
+!i10b 1
+!s85 0
+!s101 -O0
