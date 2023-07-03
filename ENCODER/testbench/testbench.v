@@ -1,7 +1,7 @@
 module testbench();
 
 reg [3:0] a;
-wire y;
+wire[1:0] y;
 
 encoder u_encoder(
     .a(a),
@@ -11,12 +11,13 @@ encoder u_encoder(
 initial begin
 
     a = 4'b0001;
-    #20
+    #20;
     a = 4'b0010;
-    #20
+    #20;
     a = 4'b0100;
-    #20
+    #20;
     a = 4'b1000;
+    #20;
     $stop;
 
 

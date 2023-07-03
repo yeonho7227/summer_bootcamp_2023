@@ -1,0 +1,43 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\summer_bootcamp_2023\ENCODER\sim
+vencoder
+!i10b 1
+!s100 WN@FU3O7EFjFai4KYzMed0
+IiVHfogm2Ug`DfJGHZz<Zj2
+Z1 V?aFAb4Q9J7bg8j[kSPkHh3
+Z2 dC:\summer_bootcamp_2023\ENCODER\sim
+w1688372679
+Z3 8../src/rtl/encoder.v
+Z4 F../src/rtl/encoder.v
+L0 1
+Z5 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z6 !s108 1688372733.652000
+Z7 !s107 ../testbench/testbench.v|../src/rtl/encoder.v|
+Z8 !s90 -reportprogress|300|-f|run.f|
+!s101 -O0
+o-O0
+vtestbench
+!i10b 1
+!s100 5n11zmPfCM?ek[4j^mb411
+ILDQ85KDNn<@eJe9@7oR842
+Z9 VhGfW:390DM[oDMzegDH9`2
+R2
+w1688372722
+Z10 8../testbench/testbench.v
+Z11 F../testbench/testbench.v
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!s101 -O0
+o-O0
