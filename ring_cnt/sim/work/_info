@@ -1,0 +1,43 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\summer_bootcamp_2023\ring_cnt\sim
+vring_cnt
+!i10b 1
+Z1 !s100 ?dlBkUJBD8C0]zfXaQ9gF0
+Z2 IFmIj0zl?Q5ILeKhjXi5Cn1
+Z3 VHK?65F>BF[gJjN8XiFbLn0
+Z4 dC:\summer_bootcamp_2023\ring_cnt\sim
+Z5 w1688802668
+Z6 8../src/rtl/ring_cnt.v
+Z7 F../src/rtl/ring_cnt.v
+L0 1
+Z8 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z9 !s108 1688802946.250000
+Z10 !s107 ../testbench/testbench.v|../src/rtl/ring_cnt.v|
+Z11 !s90 -reportprogress|300|-f|run.f|
+!s101 -O0
+o-O0
+vtestbench
+!i10b 1
+!s100 :58zKNU1z[:L0iT]7Oon`3
+I^[HPo>LIz^?VRo<NoKKCT0
+Z12 VhGfW:390DM[oDMzegDH9`2
+R4
+w1688802939
+Z13 8../testbench/testbench.v
+Z14 F../testbench/testbench.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
