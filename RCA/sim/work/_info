@@ -1,0 +1,138 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\summer_bootcamp_2023\RCA\sim
+vfulladder_16bit
+!i10b 1
+Z1 !s100 4i?Ng]JUni?OK=WOiOHmb1
+Z2 IX>A8A>j`i6GlYVY@0c>]j1
+Z3 Vil>PzQ?>iQLAzdVeP^]6D1
+Z4 dC:\summer_bootcamp_2023\RCA\sim
+Z5 w1688969103
+Z6 8../src/rtl/fulladder_16bit.v
+Z7 F../src/rtl/fulladder_16bit.v
+L0 1
+Z8 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z9 !s108 1688969370.695000
+Z10 !s107 ../testbench/testbench.v|../src/rtl/fulladder_32bit.v|../src/rtl/fulladder_16bit.v|../src/rtl/fulladder_8bit.v|../src/rtl/fulladder_4bit.v|../src/rtl/fulladder_1bit.v|../src/rtl/fulladder_half.v|
+Z11 !s90 -reportprogress|300|-f|run.f|
+!s101 -O0
+o-O0
+vfulladder_1bit
+!i10b 1
+Z12 !s100 1H_o6`SF64=fATm?WnM@a0
+Z13 Im1Boea[k^4IVhNa9QE06C3
+Z14 VBRaE_WSfWzCPf[MzEHMWl0
+R4
+Z15 w1688964571
+Z16 8../src/rtl/fulladder_1bit.v
+Z17 F../src/rtl/fulladder_1bit.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
+vfulladder_32bit
+!i10b 1
+Z18 !s100 g`^]?P2g3P6B1JRf`KgPz1
+Z19 IPmX5A>>JDo97mzGLS@K6a1
+Z20 VFk@zQJA0<_nIf2OgVih3F0
+R4
+Z21 w1688968942
+Z22 8../src/rtl/fulladder_32bit.v
+Z23 F../src/rtl/fulladder_32bit.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
+vfulladder_4bit
+!i10b 1
+Z24 !s100 ILi]^`P?MBHIb=6X`M<mW0
+Z25 I[U;zA>;?nESa:@2j6HO@f3
+Z26 VzJnz3_KDDajk1fHX2=P613
+R4
+Z27 w1688968819
+Z28 8../src/rtl/fulladder_4bit.v
+Z29 F../src/rtl/fulladder_4bit.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
+vfulladder_8bit
+!i10b 1
+Z30 !s100 1RjHCRJO937WJadAaOI>N0
+Z31 IN[K^;TXZPmKURdz2deWM?0
+Z32 V`l4E>U3MBNXDX0]DE@]n_2
+R4
+Z33 w1688969093
+Z34 8../src/rtl/fulladder_8bit.v
+Z35 F../src/rtl/fulladder_8bit.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
+vfulladder_half
+!i10b 1
+Z36 !s100 Cj=dVY]LI7K3?QY6F@aNC2
+Z37 IQk_]eddQ6niiC^di8hP]e3
+Z38 VBWPo;5bgbQlBo7<6HF;Dh2
+R4
+Z39 w1688962954
+Z40 8../src/rtl/fulladder_half.v
+Z41 F../src/rtl/fulladder_half.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
+vtestbench
+!i10b 1
+!s100 C:]X4z]Q1OdNzb09O7`M?3
+II@gWT^;eoPR2n>6K^2hzQ2
+Z42 VhGfW:390DM[oDMzegDH9`2
+R4
+w1688969365
+Z43 8../testbench/testbench.v
+Z44 F../testbench/testbench.v
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!s101 -O0
+o-O0
