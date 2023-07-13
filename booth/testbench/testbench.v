@@ -27,12 +27,10 @@ end
 
 initial begin
     start = 1'b0;
-    Q = 4'b011110;
-    M = 4'b110100;
+    Q = 6'b011110;
+    M = 6'b110100;
     #21;
     start = 1'b1;
-    #10;
-    start = 1'b0;    
     #100;
     $stop;
 end
