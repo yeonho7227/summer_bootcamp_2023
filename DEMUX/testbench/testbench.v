@@ -22,13 +22,13 @@ initial begin
     enable = 1'b1;
     sig = 2'b00;
     #20;
-    enable = 1'b1;
+    enable = 1'b0;
     sig = 2'b01;
     #20;
     enable = 1'b1;
     sig = 2'b10;
     #20;
-    enable = 1'b1;
+    enable = 1'b0;
     sig = 2'b11;
     #20;
     $stop;

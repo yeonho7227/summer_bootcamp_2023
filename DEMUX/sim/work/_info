@@ -5,11 +5,11 @@ cModel Technology
 Z0 dC:\summer_bootcamp_2023\ENCODER\sim
 vdemux
 !i10b 1
-!s100 e3gffIzF6>f:1^b;BF3ad3
-Ioz4lGA]L:4SHgQ91Nz;_B2
+!s100 ZO@02NaRYK^iC2>O>g60T2
+IH20L`;k_8?lnI>O[A9:H80
 Z1 V77JBi]UKz;b[Pl_cUmDE?0
 Z2 dC:\summer_bootcamp_2023\DEMUX\sim
-w1688446437
+w1689234763
 Z3 8../src/rtl/demux.v
 Z4 F../src/rtl/demux.v
 L0 1
@@ -17,7 +17,7 @@ Z5 OV;L;10.1d;51
 r1
 !s85 0
 31
-Z6 !s108 1688446455.343000
+Z6 !s108 1689235002.461000
 Z7 !s107 ../testbench/testbench.v|../src/rtl/demux.v|
 Z8 !s90 -reportprogress|300|-f|run.f|
 !s101 -O0
@@ -62,13 +62,13 @@ o-O0
 !s101 -O0
 vtestbench
 !i10b 1
-Z27 !s100 I:=7JUgB?oQWnKiC]M[Qi1
-Z28 IS;B4zbRGfl@AABa1]bWUO0
-Z29 VhGfW:390DM[oDMzegDH9`2
+!s100 YB3Gi9he2EBTmGZ4ijlDM2
+IMlm<oXFI24k?FDF8P=:`e0
+Z27 VhGfW:390DM[oDMzegDH9`2
 R2
-Z30 w1688445861
-Z31 8../testbench/testbench.v
-Z32 F../testbench/testbench.v
+w1689234869
+Z28 8../testbench/testbench.v
+Z29 F../testbench/testbench.v
 L0 1
 R5
 r1
