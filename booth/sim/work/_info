@@ -5,39 +5,39 @@ cModel Technology
 Z0 dC:\summer_bootcamp_2023\booth\sim
 vbooth
 !i10b 1
-Z1 !s100 1ib1cK?2Hd;;SbbEHhc0I0
-Z2 I3?g7JMmDbU;TD@M5ImDF:2
-Z3 V<5DI`]Y:>^I8_R]g;H6zQ2
-Z4 dC:\summer_bootcamp_2023\booth\sim
-Z5 w1689229141
-Z6 8../src/rtl/booth.v
-Z7 F../src/rtl/booth.v
+!s100 PYlC<8aRTW88U5?XPJ_061
+Ic=]4>9KRXcL^CYif]N__d3
+Z1 V<5DI`]Y:>^I8_R]g;H6zQ2
+Z2 dC:\summer_bootcamp_2023\booth\sim
+w1689238835
+Z3 8../src/rtl/booth.v
+Z4 F../src/rtl/booth.v
 L0 1
-Z8 OV;L;10.1d;51
+Z5 OV;L;10.1d;51
 r1
 !s85 0
 31
-Z9 !s108 1689229404.000000
-Z10 !s107 ../testbench/testbench.v|../src/rtl/booth.v|
-Z11 !s90 -reportprogress|300|-f|run.f|
+Z6 !s108 1689238840.512000
+Z7 !s107 ../testbench/testbench.v|../src/rtl/booth.v|
+Z8 !s90 -reportprogress|300|-f|run.f|
 !s101 -O0
 o-O0
 vtestbench
 !i10b 1
-!s100 zJRlAbNMXzf>AD@=0h=cG1
-I3Fl5d;a7mgJMWen[MNg?H1
-Z12 VhGfW:390DM[oDMzegDH9`2
-R4
-w1689229369
+Z9 !s100 zJRlAbNMXzf>AD@=0h=cG1
+Z10 I3Fl5d;a7mgJMWen[MNg?H1
+Z11 VhGfW:390DM[oDMzegDH9`2
+R2
+Z12 w1689238173
 Z13 8../testbench/testbench.v
 Z14 F../testbench/testbench.v
 L0 1
-R8
+R5
 r1
 !s85 0
 31
-R9
-R10
-R11
+R6
+R7
+R8
 !s101 -O0
 o-O0

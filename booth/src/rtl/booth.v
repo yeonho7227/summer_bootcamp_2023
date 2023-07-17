@@ -39,7 +39,7 @@ wire [5:0] a_shift;
 wire [5:0] a_resert;
 
 assign a_resert = (q0 == 1'b0) && (sum_Q[0] == 6'h01) ? A + {~M + 6'h01} :
-                        (q0 == 1'b1) && (sum_Q[0] == 6'h00) ? A + M : A;
+                    (q0 == 1'b1) && (sum_Q[0] == 6'h00) ? A + M : A;
 assign a_shift = {a_resert[5], a_resert[5:1]};
 
 always@(posedge clk or negedge n_rst) begin
@@ -50,13 +50,15 @@ always@(posedge clk or negedge n_rst) begin
         cnt <= 6'h00;
         product <= 12'h00;
     end
-    else begin
-        sum_Q <= {a_shift[0],sum_Q[5:1]};
+    else if (cnt <= 6'h06) begin
+        sum_Q <= {A[0],sum_Q[5:1]};
         A <= a_shift;
         q0 <= sum_Q[0];
-        product <= {a_shift, sum_Q};
+        product <= {A, sum_Q};
     end
+end
 
+endmodule
     /*
     else if ((start == 1'b1) && (cnt <= 6'h06) && (q0 == 1'b0) && (sum_Q[0] == 1'h0)) begin
         sum_Q <= {a_shift[0],sum_Q[5:1]};
@@ -84,7 +86,6 @@ always@(posedge clk or negedge n_rst) begin
         A <= A;
         product <= product;
     end*/
-end
 
 /*
 always@(posedge clk or negedge n_rst) begin
@@ -102,13 +103,6 @@ always@(posedge clk or negedge n_rst) begin
     end
 end
 */
-
-
-endmodule
-
-
-
-
 
 
 /*
