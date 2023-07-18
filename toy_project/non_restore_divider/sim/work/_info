@@ -5,39 +5,39 @@ cModel Technology
 Z0 dC:\summer_bootcamp_2023\toy_project\non_restore_divider\sim
 vnon_restore_divider
 !i10b 1
-!s100 BJPWHmiK?GPKTOWE0?`Qi1
-IY[3JI2[YghWE6^m1?I:?T1
-Z1 V3@68jfL];WQA^VO?lQDc[2
-Z2 dC:\summer_bootcamp_2023\toy_project\non_restore_divider\sim
-w1689579187
-Z3 8../src/rtl/non_restore_divider.v
-Z4 F../src/rtl/non_restore_divider.v
+Z1 !s100 H;b0B`b44oebB>28i5A[z3
+Z2 I0b6bW:mdOjUdFfO03LD[l3
+Z3 VEc31dm>m`DIcZHN<7fdgg2
+Z4 dC:\summer_bootcamp_2023\toy_project\non_restore_divider\sim
+Z5 w1689656874
+Z6 8../src/rtl/non_restore_divider.v
+Z7 F../src/rtl/non_restore_divider.v
 L0 1
-Z5 OV;L;10.1d;51
+Z8 OV;L;10.1d;51
 r1
 !s85 0
 31
-Z6 !s108 1689579190.402000
-Z7 !s107 ../testbench/testbench.v|../src/rtl/non_restore_divider.v|
-Z8 !s90 -reportprogress|300|-f|run.f|
+Z9 !s108 1689657246.068000
+Z10 !s107 ../testbench/testbench.v|../src/rtl/non_restore_divider.v|
+Z11 !s90 -reportprogress|300|-f|run.f|
 !s101 -O0
 o-O0
 vtestbench
 !i10b 1
-Z9 !s100 W>]F]HQ`CNlJh[a9QeVPT2
-Z10 IGec8UYe2d@KmzGYHFjA;j0
-Z11 VhGfW:390DM[oDMzegDH9`2
-R2
-Z12 w1689577448
+!s100 b<chjX]lV;_iRKl`Yg0Y61
+I0oOOG`JLT^:;TXa>cCM[[1
+Z12 VhGfW:390DM[oDMzegDH9`2
+R4
+w1689657241
 Z13 8../testbench/testbench.v
 Z14 F../testbench/testbench.v
 L0 1
-R5
+R8
 r1
 !s85 0
 31
-R6
-R7
-R8
+R9
+R10
+R11
 !s101 -O0
 o-O0

@@ -13,7 +13,7 @@ input n_rst;
 input start;
 
 input [3:0] Q; //divisor 
-input [4:0] M; //dividend
+input [3:0] M; //dividend
 
 output reg [3:0] Q_product; 
 output reg [4:0] R_product;
@@ -38,12 +38,12 @@ wire [3:0] Q_shift;
 wire [4:0] A_resert;
 wire [3:0] Q_resert;
 
-assign A_shift = {A[3:0],1'b1};
+assign A_shift = {A[3:0],sum_Q[3]};
 assign Q_shift = {sum_Q[2:0],1'b0};
 
 assign A_resert = (A[4] == 1'b1) ? A_shift + M : A_shift + {~M + 5'h01};
 
-assign Q_resert = (A[4] == 1'b1) ? {Q_shift[3:1],1'b0} : {Q_shift[3:1],1'b1};
+assign Q_resert = (A_resert[4] == 1'b1) ? {Q_shift[3:1],1'b0} : {Q_shift[3:1],1'b1};
 
 
 always@(posedge clk or negedge n_rst) begin
@@ -58,7 +58,7 @@ always@(posedge clk or negedge n_rst) begin
         A <= A_resert;
         R_product <= A;
         sum_Q <= Q_resert;
-        Q_product <= Q_resert;
+        Q_product <= sum_Q;
     end
 end
 

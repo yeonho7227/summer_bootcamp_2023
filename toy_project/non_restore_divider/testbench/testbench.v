@@ -3,7 +3,7 @@ module testbench();
 reg clk;
 reg n_rst;
 reg [3:0] Q;
-reg [4:0] M;
+reg [3:0] M;
 reg start;
 
 wire [3:0] Q_product;
@@ -30,7 +30,7 @@ always #5 clk = ~clk;
 initial begin
     start = 1'b0;
     Q = 4'b1111;
-    M = 5'b01011;
+    M = 4'b1011;
     #21;
     start = 1'b1;
     #100;
