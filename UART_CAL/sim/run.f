@@ -1,2 +1,2 @@
-../src/rtl/uart.v
-../testbench/testbench.v
+../src/rtl/decoder.v
+../testbench/testbench3.v
