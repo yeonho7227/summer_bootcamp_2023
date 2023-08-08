@@ -1,20 +1,21 @@
+`timescale 1ns/100ps
 module testbench2();
 
 reg clk;
 reg n_rst;
-reg [5:0] Q;
-reg [5:0] M;
-reg start;
 
-wire [11:0] product;
+reg rxd;
+reg rx_start;
+wire [7:0] rx_data;
+wire rx_valid;
 
-top u_top(
+rx u_rx(
     .clk(clk),
     .n_rst(n_rst),
-    .Q(Q),
-    .M(M),
-    .product(product),
-    .start(start)
+    .rx_start(rx_start),
+    .rxd(rxd),
+    .rx_data(rx_data),
+    .rx_valid(rx_valid)    
 );
 
 always #5 clk = ~clk;
@@ -26,14 +27,31 @@ initial begin
 end
 
 initial begin
-    start = 1'b0;
-    Q = 6'b011110;
-    M = 6'b110100;
+    rxd = 1'b0;
+    rx_start = 1'b0;
     #21;
-    start = 1'b1;
-    #100;
+
+    rx_start = 1'b1;
+    #160;
+    rxd = 1'b1;
+    #160;
+    rxd = 1'b0;
+    #160;
+    rxd = 1'b1;
+    #160;
+    rxd = 1'b0;
+    #160;
+    rxd = 1'b1;
+    #160;
+    rxd = 1'b0;
+    #160;
+    rxd = 1'b1;
+    #160;
+    rxd = 1'b0;
+    #160;
+    rx_start = 1'b0;
+    #300;
     $stop;
 end
 
 endmodule
-

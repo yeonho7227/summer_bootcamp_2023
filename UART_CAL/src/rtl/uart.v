@@ -4,28 +4,32 @@ module uart (
     rxd,
     rx_data,
     rx_valid,
+    rx_start,
+
     txd,
     tx_data,
-    tx_valid
+    tx_valid,
+    uout_valid
 );
 
 input clk;
 input n_rst;
 
 input rxd;
+input rx_start;
 output [7:0] rx_data;
 output rx_valid;
 
 output txd;
+output tx_valid;
 input [7:0] tx_data;
-input tx_valid;
+input uout_valid;
 
-wire rx_start;
-wire tx_start;
 
 rx u_rx (
     .clk(clk),
     .n_rst(n_rst),
+
     .rx_start(rx_start),
     .rxd(rxd),
     .rx_data(rx_data),
@@ -35,7 +39,8 @@ rx u_rx (
 tx u_tx (
     .clk(clk),
     .n_rst(n_rst), 
-    .tx_start(tx_start),
+
+    .uout_valid(uout_valid),
     .txd(txd),
     .tx_data(tx_data),
     .tx_valid(tx_valid)

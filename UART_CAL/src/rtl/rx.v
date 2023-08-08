@@ -46,7 +46,7 @@ always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt <= 16'h0000;
     end
-    else if (rx_start == 1'b0) begin
+    else if (rx_start == 1'b1) begin
         cnt <= (cnt == CNTEND) ? 16'h0000 : cnt + 16'h0001;
     end
     else begin
@@ -59,7 +59,7 @@ always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt <= 4'h0;
     end
-    else if (rx_start == 1'b0) begin
+    else if (rx_start == 1'b1) begin
         cnt <= (cnt == 4'hf) ? 4'h0 : cnt + 4'h1;
     end
     else begin
@@ -69,32 +69,36 @@ end
 
 assign rxen = (cnt == 4'hf)? 1'b1 : 1'b0;
 
+
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt2 <= 4'h0;
     end
-    else if (rx_start == 1'b0) begin
-        cnt2 <= (cnt2 == 4'h9) ? 4'h0 : cnt2 + 4'h1;
+    else if  (c_state == DATA) begin
+        cnt2 <= (cnt2 == 4'h8) ? 4'h0 : (rxen == 1'b1) ? cnt2 + 4'h1 : cnt2;
     end
     else begin
         cnt2 <= cnt2;
     end
 end
 
+
+
 always @ (*) begin
     case(c_state) 
-        IDLE : n_state = (rx_start == 1'b0) ? START : c_state;
-        START : n_state = (cnt2 == 4'h1) ? DATA : c_state;
-        DATA : n_state = (cnt2 == 4'h9) ? STOP : c_state;
+        IDLE : n_state = (rx_start == 1'b1) ? START : c_state;
+        START : n_state = (cnt2 == 4'h0) ? DATA : c_state;
+        DATA : n_state = (cnt2 == 4'h8) ? STOP : c_state;
         STOP : n_state = (cnt2 == 4'h0) ? IDLE : c_state;
     endcase
 end
+
 
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         rx_data <= 8'h00;
     end 
-    else if (c_state == DATA) begin
+    else if ((c_state == DATA) && (cnt2 <= 4'h8)) begin
         rx_data <= (rxen == 1'b1) ? {rxd , rx_data[7:1]} : rx_data;
     end
     else begin
@@ -102,6 +106,24 @@ always @ (posedge clk or negedge n_rst) begin
     end
 end
 
-assign rx_valid = ((c_state == STOP) && (rxen == 1'b1)) ? 1'b1 : 1'b0;
+
+/*
+always @ (posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        rx_data <= 8'h00;
+        cnt2 <= 4'h0;
+    end 
+    else if ((c_state == DATA) && (rx_start == 1'b1)) begin
+        cnt2 <= (cnt2 == 4'h8) ? 4'h0 : (rxen == 1'b1) ? cnt2 + 4'h1 : cnt2;
+        rx_data <= {rxd , rx_data[7:1]};
+    end
+    else begin
+        rx_data <= rx_data;
+        cnt2 <= cnt2;
+    end
+end
+*/
+
+assign rx_valid = (c_state == STOP) ? 1'b1 : 1'b0;
 
 endmodule
