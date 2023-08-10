@@ -86,16 +86,16 @@ always@(posedge clk or negedge n_rst) begin
     end
 end
 
-reg [1:0] dtype_q;
+reg [3:0] dtype_q;
 always@(posedge clk or negedge n_rst) begin
     if (!n_rst) begin
-        dtype_q <= 2'h0;
+        dtype_q <= 4'h0;
     end
     else if (c_state == TYPE) begin
-        if (rx_data == 8'h53)
-            dtype_q <= 2'h1;
-        else if (rx_data == 8'h57)
-            dtype_q <= 2'h2;
+        if (rx_data == 8'h53) //s
+            dtype_q <= 4'h1; 
+        else if (rx_data == 8'h57) //u
+            dtype_q <= 4'h2; 
     end
     else begin
         dtype_q <= dtype_q;
@@ -228,14 +228,14 @@ always@(posedge clk or negedge n_rst) begin
         operator_q <= 5'h00;
     end
     else if (c_state == OPERATION) begin
-        if (rx_data == 8'h2B)
-            operator_q <= 5'h00;
-        else if (rx_data == 8'h2D)
+        if (rx_data == 8'h2B) //+
             operator_q <= 5'h01;
-        else if (rx_data == 8'h2A)
+        else if (rx_data == 8'h2D) //-
             operator_q <= 5'h02;
-        else if (rx_data == 8'h2F)
+        else if (rx_data == 8'h2A) //*
             operator_q <= 5'h03;
+        else if (rx_data == 8'h2F) //divider
+            operator_q <= 5'h04;
     end
     else begin
         operator_q <= operator_q;
