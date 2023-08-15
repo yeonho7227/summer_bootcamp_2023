@@ -38,23 +38,44 @@ initial begin
     operator = 5'h00;
     src1 = 16'h0000;
     src2 = 16'h0000;
-    #21;
-
-    parser_done = 1'b1; //add
-    dtype = 4'h2;
+    #25;
+    
+    parser_done = 1'b1;
+    dtype = 4'h2; //add
     operator = 5'h01;
     src1 = 16'h0007;
     src2 = 16'h0002;
+    #25;
     parser_done = 1'b0;
-    #50;
+    #25;
 
-    parser_done = 1'b1; //substraction
-    dtype = 4'h1;
+    parser_done = 1'b1;
+    dtype = 4'h1; //substraction
     operator = 5'h02;
     src1 = 16'h0008;
-    src2 = 16'h0002;
+    src2 = 16'h0004;
+    #25;
     parser_done = 1'b0;
-    #50;
+    #25;
+
+    parser_done = 1'b1;
+    dtype = 4'h2; //multi
+    operator = 5'h03;
+    src1 = 16'h0007;
+    src2 = 16'h0003;
+    #100;
+    parser_done = 1'b0;
+    #25;
+
+    parser_done = 1'b1;
+    dtype = 4'h1; //booth
+    operator = 5'h03;
+    src1 = 16'b0000000000000110;
+    src2 = 16'b1111111111111011;
+    #200;
+    parser_done = 1'b0;
+    #100;
+
 
     $stop;
 end

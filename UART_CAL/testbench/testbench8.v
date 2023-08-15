@@ -14,13 +14,11 @@ wire alu_done;
 shift_add_multi u_shift_add_multi(
     .clk(clk),
     .n_rst(n_rst),
-    .dtype(dtype),
-    .operator(operator),
     .src2(src2),
     .src1(src1),
     .calc_res(calc_res),
     .parser_done(parser_done),
-    .alu_done(alu_done)
+    .multi_done(multi_done)
 );
 
 
@@ -35,18 +33,14 @@ end
 
 initial begin
     parser_done = 1'b0;
-    dtype = 4'h0;
-    operator = 5'h00;
-    src1 = 16'h0000;
-    src2 = 16'h0000;
+    src1 = 16'b0000;
+    src2 = 16'b0000;
     #30;
 
     parser_done = 1'b1;
-    dtype = 4'h2;
-    operator = 5'h03;
     src1 = 16'h0009;
     src2 = 16'h0002;
-    #21;
+    #50;
     parser_done = 1'b0;
     #30;
     $stop;

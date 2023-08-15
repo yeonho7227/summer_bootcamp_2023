@@ -1,4 +1,4 @@
 library verilog;
 use verilog.vl_types.all;
-entity testbench6 is
-end testbench6;
+entity testbench9 is
+end testbench9;
