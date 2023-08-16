@@ -15,86 +15,72 @@ input [31:0] calc_res;
 output [7:0] tx_data;
 output uout_valid; //encoder valid
 
-localparam IDLE = 3'h0;
-localparam FORMAT = 3'h1;
-localparam TYPE = 3'h2;
-localparam DATA1 = 3'h3;
-localparam OPERATION = 3'h4;
-localparam DATA2 = 3'h5;
-localparam END_PROTOCOL = 3'h6;
-localparam RESULT = 3'h7;
+localparam IDLE = 2'h0;
+localparam START = 2'h1;
+localparam DATA = 2'h2;
+localparam STOP = 2'h3;
 
-reg [2:0] c_state;
-reg [2:0] n_state;
+reg [1:0] c_state;
+reg [1:0] n_state;    
 
-reg [3:0] cnt;
-reg [3:0] cnt2;
+reg [3:0] cnt; 
+reg [3:0] cnt2; //state cnt
 
-always@(posedge clk or negedge n_rst)
-    if(!n_rst)
-        c_state <= IDLE;
-    else
+always @ (posedge clk or negedge n_rst)
+    if(!n_rst) begin
+        c_state <= IDLE;   
+    end
+    else begin
         c_state <= n_state;
-
-always@(*) begin
-    case(c_state) 
-        IDLE : n_state = (rx_valid == 1'b1) ? FORMAT : c_state;
-        FORMAT : n_state = ((rx_valid == 1'b1) && (rx_data == 8'h20)) ? TYPE : c_state;
-        TYPE : n_state = ((rx_valid == 1'b1) && (rx_data == 8'h20)) ? DATA1 : c_state;
-        DATA1 : n_state = ((rx_valid == 1'b1) && (cnt == 4'h4)) ? OPERATION : c_state;
-        OPERATION : n_state = (rx_valid == 1'b1) ? DATA2 : c_state;
-        DATA2 : n_state = ((rx_data == 8'h3D) && (rx_valid == 1'b1)) ? RESULT: c_state;
-        //END_PROTOCOL : n_state = (rx_valid == 1'b1) ? RESULT : c_state;
-        RESULT : n_state = IDLE;
-        default : n_state = (rx_valid == 1'b1) ? FORMAT : c_state;
-    endcase 
 end
 
-//((rx_data == 8'h3D) && (rx_valid == 1'b1))
+always @ (posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        cnt2 <= 4'h0;
+    end
+    else if  (c_state == DATA) begin
+        cnt2 <= (cnt2 == 4'h4) ? 4'h0 :
+                (txen == 1'b1) ? cnt2 + 4'h1 : cnt2;
+    end
+    else begin
+        cnt2 <= cnt2;
+    end
+end
+
+// 32'h1234_5678
+// 1 = 0001 => 49
+
+// 32'h0000_0009
+// 9 = 0009 => 39 
+
+
+always @ (*) begin
+    case(c_state) 
+        IDLE : n_state = (alu_done  == 1'b1) ? START : c_state;
+        START : n_state = (cnt2 == 4'h0) ? DATA : c_state;
+        DATA : n_state = (cnt2 == 4'h4) ? STOP : c_state;
+        STOP : n_state = (cnt2 == 4'h0) ? IDLE : c_state;
+        default : n_state = IDLE;
+    endcase
+end
 
 /*
-IDLE : n_state = (rx_data)
-FORMAT : n_state = (rx_data = 8'h20)? TYPE :c_state;
-TYPE :
-
-if (c_state == FORMAT)
-    if (rx_data == 8'h49)
-        format <= 1'b1;
-
-*/
-
 reg format_q;
 always@(posedge clk or negedge n_rst) begin
     if (!n_rst) begin
-        format_q <= 1'h0;
+        tx_data <= 8'h00;
     end
-    else if (c_state == FORMAT) begin
-        if (rx_data == 8'h49)
-            format_q <= 1'b1;
-        else 
-            format_q <= 1'b0;
+    else if (c_state == FORMAR) begin
+        if(format_q == 1'b1) 
+            tx_data <= 8'h49;
+        else
+            tx_data <= 8'h30;
     end
     else begin
-        format_q <= format_q;
+        tx_data <= tx_data
     end
 end
 
-reg [3:0] dtype_q;
-always@(posedge clk or negedge n_rst) begin
-    if (!n_rst) begin
-        dtype_q <= 4'h0;
-    end
-    else if (c_state == TYPE) begin
-        if (rx_data == 8'h53) //s
-            dtype_q <= 4'h1; 
-        else if (rx_data == 8'h57) //u
-            dtype_q <= 4'h2; 
-    end
-    else begin
-        dtype_q <= dtype_q;
-    end
-end
-assign dtype = dtype_q;
 
 reg [15:0] src1_q; 
 always @ (posedge clk or negedge n_rst) begin
@@ -155,7 +141,6 @@ always @ (posedge clk or negedge n_rst) begin
     end
 end
 
-
 reg [15:0] src2_q; 
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
@@ -214,64 +199,44 @@ always @ (posedge clk or negedge n_rst) begin
         src2 <= src2;
     end
 end
-
-reg [4:0] operator_q;
-always@(posedge clk or negedge n_rst) begin
-    if (!n_rst) begin
-        operator_q <= 5'h00;
-    end
-    else if (c_state == OPERATION) begin
-        if (rx_data == 8'h2B) //+
-            operator_q <= 5'h01;
-        else if (rx_data == 8'h2D) //-
-            operator_q <= 5'h02;
-        else if (rx_data == 8'h2A) //*
-            operator_q <= 5'h03;
-        else if (rx_data == 8'h2F) //divider
-            operator_q <= 5'h04;
-    end
-    else begin
-        operator_q <= operator_q;
-    end
-end
-assign operator = operator_q;
-
-
-/*
-reg parser_done_q;
-always@(posedge clk or negedge n_rst) begin
-    if (!n_rst) begin
-        parser_done_q <= 1'h0;
-    end
-    else if (c_state == RESULT) begin
-        if (rx_data == 8'h3D)
-            parser_done_q <= 1'b1;
-        else if (parser_done_q == 1'b1)
-            parser_done_q = 1'b0;
-        else 
-            parser_done_q <= 1'b0;
-    end
-end
 */
 
-assign parser_done = (c_state == RESULT) ? 1'b1 : 1'b0;
-
-
-/*
-reg parser_done_q;
+reg [31:0] calc_res_q;
 always@(posedge clk or negedge n_rst) begin
     if(!n_rst) begin
-        parser_done_q <= 1'b0;
+        calc_res_q <= 8'h00;
     end
-    else if (c_state == RESULT) begin
-        parser_done_q <= 1'b1;
+    else if (c_state == START) begin
+        calc_res_q <= tx_data;
+    end
+    else if (c_state == DATA) begin
+        calc_res_q <= (txen == 1'b1) ? {1'b0, calc_res_q[7:1]} : calc_res_q;
     end
     else begin
-        parser_done_q <= parser_done_q;
+        calc_res_q <= calc_res_q;
     end
 end
-assign parser_done = parser_done_q;
-*/
+
+always@(posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        tx_data <= 8'h1;
+    end
+    else if (c_state == START) begin
+        tx_data <= 1'b0;
+    end
+    else if (c_state == DATA) begin
+        tx_data <= (txen == 1'b1) ? calc_res_q[0] : tx_data;
+    end
+    else if (c_state == STOP) begin
+        tx_data <= 1'b1;
+    end
+    else begin
+        tx_data <= tx_data;
+    end
+end
+
+
+assign uout_valid = (c_state == RESULT) ? 1'b1 : 1'b0;
 
 endmodule
 

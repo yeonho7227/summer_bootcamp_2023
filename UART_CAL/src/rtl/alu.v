@@ -256,16 +256,16 @@ booth u_booth(
     .booth_done(booth_done)
 );
 
-/*
-non_restore_divider u_non_restore_divider( //unsign 4bit
+divider u_divider(
     .clk(clk),
     .n_rst(n_rst),
-    .Q(src2),
-    .M(src1),
-    .Q_product(calc_res),
-    .R_product(),
-    .start(parser_done)
-);*/
+    .Q(src1),
+    .M(src2),
+    .Q_product(calc_res_divider[31:16]),
+    .R_product(calc_res_divider[15:0]),
+    .parser_done(start_divider),
+    .divider_done(divider_done)
+);
 
 
 assign calc_res = (((calc_res_q == 4'h1) || (calc_res_q == 4'h5)) && (alu_done == 1'b1)) ? calc_res_add :
@@ -337,8 +337,8 @@ always @(*) begin
 end
 
 
-
-assign alu_done = ((add_done_q == 1'b1) || (substraction_done_q == 1'b1) || (multi_done_q == 1'b1) ||(booth_done_q == 1'b1)) ? 1'b1 : 1'b0;
+assign alu_done = ((add_done_q == 1'b1) || (substraction_done_q == 1'b1) || (multi_done_q == 1'b1) 
+                    || (booth_done_q == 1'b1) || (divider_done_q == 1'b1) ) ? 1'b1 : 1'b0;
 
 
 endmodule

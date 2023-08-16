@@ -76,9 +76,19 @@ initial begin
     parser_done = 1'b0;
     #100;
 
-
+    parser_done = 1'b1;
+    dtype = 4'h2; //divder
+    operator = 5'h04;
+    src1 = 16'b0000000000000111;
+    src2 = 16'b0000000000000011;
+    #200;
+    parser_done = 1'b0;
+    #100;
+    
     $stop;
 end
+
+
 
 endmodule
 
