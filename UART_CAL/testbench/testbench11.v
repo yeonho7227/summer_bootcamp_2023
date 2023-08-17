@@ -34,7 +34,7 @@ initial begin
 
     alu_done = 1'b1;
     calc_res = 32'h123f5a78;
-    #1000
+    #1000;
 
     $stop;
 

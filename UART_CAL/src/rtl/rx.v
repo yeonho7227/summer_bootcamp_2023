@@ -17,11 +17,9 @@ wire rxen; // speed
 output reg [7:0] rx_data;
 output rx_valid;
 
-
 localparam IDLE = 2'h0;
-localparam START = 2'h1;
-localparam DATA = 2'h2;
-localparam STOP = 2'h3;
+localparam DATA = 2'h1;
+localparam STOP = 2'h2;
 
 parameter CNTEND = 16'h1B2; //115200 BaudRate / 50MHz
 
@@ -69,7 +67,7 @@ end
 
 assign rxen = (cnt == 4'hf)? 1'b1 : 1'b0;
 
-
+/*
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt2 <= 4'h0;
@@ -81,15 +79,28 @@ always @ (posedge clk or negedge n_rst) begin
         cnt2 <= cnt2;
     end
 end
+*/
 
+//cnt <= (rxen)?cnt+1:cnt;
 
+always @ (posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        cnt2 <= 4'h0;
+    end
+    else if  (c_state == DATA) begin
+        cnt2 <= (rxen == 1'b1) ? cnt2 + 4'h1 : cnt2;
+    end
+    else begin
+        cnt2 <= cnt2;
+    end
+end
 
 always @ (*) begin
     case(c_state) 
-        IDLE : n_state = (rx_start == 1'b1) ? START : c_state;
-        START : n_state = (cnt2 == 4'h0) ? DATA : c_state;
+        IDLE : n_state = (rx_start == 1'b1) ? DATA : c_state;
+        //START : n_state = (cnt2 == 4'h0) ? DATA : c_state;
         DATA : n_state = (cnt2 == 4'h8) ? STOP : c_state;
-        STOP : n_state = (cnt2 == 4'h0) ? IDLE : c_state;
+        STOP : n_state = IDLE; //(cnt2 == 4'h0) ? IDLE : c_state;
     endcase
 end
 

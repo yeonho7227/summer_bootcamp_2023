@@ -1,4 +1,4 @@
 quit -sim
 vlib work
 vlog -f run.f
-vsim work.testbench11
+vsim work.testbench12
