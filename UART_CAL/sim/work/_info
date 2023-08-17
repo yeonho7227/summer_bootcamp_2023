@@ -4,135 +4,173 @@ K3
 cModel Technology
 Z0 dC:\summer_bootcamp_2023\UART_CAL\sim
 vadd
-!i10b 1
-!s100 405GVC0;@nzMzQ6lYjQ4N0
-IzJDP1KY4:YcgKWLPVOFJX0
-V_8_bFdRObQ7=39ki7fbB01
-Z1 dC:\summer_bootcamp_2023\UART_CAL\sim
-w1691648542
-8../src/rtl/add.v
-F../src/rtl/add.v
+Z1 !s100 405GVC0;@nzMzQ6lYjQ4N0
+Z2 IzJDP1KY4:YcgKWLPVOFJX0
+Z3 V_8_bFdRObQ7=39ki7fbB01
+Z4 dC:\summer_bootcamp_2023\UART_CAL\sim
+Z5 w1691648542
+Z6 8../src/rtl/add.v
+Z7 F../src/rtl/add.v
 L0 1
-Z2 OV;L;10.1d;51
+Z8 OV;L;10.1d;51
 r1
-!s85 0
 31
-Z3 !s108 1692163412.511000
-Z4 !s107 ../testbench/testbench5.v|../src/rtl/divider.v|../src/rtl/booth.v|../src/rtl/shift_add_multi.v|../src/rtl/substraction.v|../src/rtl/add.v|../src/rtl/alu.v|
-Z5 !s90 -reportprogress|300|-f|run.f|
-!s101 -O0
+Z9 !s108 1692240558.756000
+Z10 !s107 ../testbench/testbench5.v|../src/rtl/divider.v|../src/rtl/booth.v|../src/rtl/shift_add_multi.v|../src/rtl/substraction.v|../src/rtl/add.v|../src/rtl/alu.v|
+Z11 !s90 -reportprogress|300|-f|run.f|
 o-O0
+!i10b 1
+!s85 0
+!s101 -O0
 valu
-!i10b 1
-!s100 6de9iAS1VQ>nodV:X@K901
-IN<@7ia]`C2dS64P^U;lm;2
-VeaPz;<XV`QQNkD1CFBSS41
-R1
-w1692156805
-8../src/rtl/alu.v
-F../src/rtl/alu.v
-L0 1
-R2
-r1
-!s85 0
-31
-R3
+Z12 !s100 6de9iAS1VQ>nodV:X@K901
+Z13 IN<@7ia]`C2dS64P^U;lm;2
+Z14 VeaPz;<XV`QQNkD1CFBSS41
 R4
-R5
-!s101 -O0
+Z15 w1692156805
+Z16 8../src/rtl/alu.v
+Z17 F../src/rtl/alu.v
+L0 1
+R8
+r1
+31
+R9
+R10
+R11
 o-O0
+!i10b 1
+!s85 0
+!s101 -O0
 vbooth
-!i10b 1
-!s100 l@z96;Kza2cYMiY6;?YE03
-I^2P@8m9bQX8oaaW7Xz9g]1
-Vd3fV3m@JmBJnN6jbHoo`g0
-R1
-w1692003550
-8../src/rtl/booth.v
-F../src/rtl/booth.v
-L0 1
-R2
-r1
-!s85 0
-31
-R3
+Z18 !s100 l@z96;Kza2cYMiY6;?YE03
+Z19 I^2P@8m9bQX8oaaW7Xz9g]1
+Z20 Vd3fV3m@JmBJnN6jbHoo`g0
 R4
-R5
-!s101 -O0
+Z21 w1692003550
+Z22 8../src/rtl/booth.v
+Z23 F../src/rtl/booth.v
+L0 1
+R8
+r1
+31
+R9
+R10
+R11
 o-O0
-vdivider
 !i10b 1
-!s100 IY=RS=IGEDRk2`c7zk6bU3
-IzK_dRZ^UEC0<0;mfg5HXl1
-Vc5_bOCi3hWDhNoz:O6SUa3
-R1
-w1692156616
-8../src/rtl/divider.v
-F../src/rtl/divider.v
+!s85 0
+!s101 -O0
+vdivider
+Z24 !s100 IY=RS=IGEDRk2`c7zk6bU3
+Z25 IzK_dRZ^UEC0<0;mfg5HXl1
+Z26 Vc5_bOCi3hWDhNoz:O6SUa3
+R4
+Z27 w1692156616
+Z28 8../src/rtl/divider.v
+Z29 F../src/rtl/divider.v
 L0 1
-R2
+R8
+r1
+31
+R9
+R10
+R11
+o-O0
+!i10b 1
+!s85 0
+!s101 -O0
+vencoder
+!i10b 1
+Z30 !s100 FQ:654aY[MSQDB8E5IMzb0
+Z31 I<kfa>almWURWS<dD_nKNG1
+Z32 VU1G[aI4o3j5jBIVKhQ8@h1
+R4
+Z33 w1692249166
+Z34 8../src/rtl/encoder.v
+Z35 F../src/rtl/encoder.v
+L0 1
+R8
 r1
 !s85 0
 31
-R3
-R4
-R5
+Z36 !s108 1692250545.743000
+Z37 !s107 ../testbench/testbench11.v|../src/rtl/encoder.v|
+R11
 !s101 -O0
 o-O0
 vshift_add_multi
-!i10b 1
-!s100 lYo9]SX5X2j69ONWkeddj0
-I>YclL^mkTobVT66Y>Tnf=2
-V>o6_40km6:C>RAkMA2oA10
-R1
-w1691992801
-8../src/rtl/shift_add_multi.v
-F../src/rtl/shift_add_multi.v
-L0 1
-R2
-r1
-!s85 0
-31
-R3
+Z38 !s100 lYo9]SX5X2j69ONWkeddj0
+Z39 I>YclL^mkTobVT66Y>Tnf=2
+Z40 V>o6_40km6:C>RAkMA2oA10
 R4
-R5
-!s101 -O0
+Z41 w1691992801
+Z42 8../src/rtl/shift_add_multi.v
+Z43 F../src/rtl/shift_add_multi.v
+L0 1
+R8
+r1
+31
+R9
+R10
+R11
 o-O0
-vsubstraction
 !i10b 1
-!s100 jFOZfg29Y8hSSXCFz]na`1
-I9VI6nE<Ed[3<7iz=VXdIG3
-V]K_QE>XL`E8oFK?]CJbIK1
-R1
-w1691648516
-8../src/rtl/substraction.v
-F../src/rtl/substraction.v
+!s85 0
+!s101 -O0
+vsubstraction
+Z44 !s100 jFOZfg29Y8hSSXCFz]na`1
+Z45 I9VI6nE<Ed[3<7iz=VXdIG3
+Z46 V]K_QE>XL`E8oFK?]CJbIK1
+R4
+Z47 w1691648516
+Z48 8../src/rtl/substraction.v
+Z49 F../src/rtl/substraction.v
 L0 1
-R2
+R8
+r1
+31
+R9
+R10
+R11
+o-O0
+!i10b 1
+!s85 0
+!s101 -O0
+vtestbench11
+!i10b 1
+Z50 !s100 kEP^hKUhBlj]6P=D6H?F>3
+Z51 IoLPkU]R_T_]=TB^gN;fAG2
+Z52 V9^BfPoBjLJ1kOcajBUzG;1
+R4
+Z53 w1692250412
+Z54 8../testbench/testbench11.v
+Z55 F../testbench/testbench11.v
+L0 2
+R8
 r1
 !s85 0
 31
-R3
-R4
-R5
+R36
+R37
+R11
 !s101 -O0
 o-O0
 vtestbench5
-!i10b 1
-!s100 =7@m7`Ik8MZE4nldM1<B21
-I3oKMCnC<fZ:11RhhJ^XdI0
-V_X@[;=7]=JDFIT0=@Je0i3
-R1
-w1692156660
-8../testbench/testbench5.v
-F../testbench/testbench5.v
-L0 2
-R2
-r1
-!s85 0
-31
-R3
+Z56 !s100 =7@m7`Ik8MZE4nldM1<B21
+Z57 I3oKMCnC<fZ:11RhhJ^XdI0
+Z58 V_X@[;=7]=JDFIT0=@Je0i3
 R4
-R5
-!s101 -O0
+Z59 w1692156660
+Z60 8../testbench/testbench5.v
+Z61 F../testbench/testbench5.v
+L0 2
+R8
+r1
+31
+R9
+R10
+R11
 o-O0
+!i10b 1
+!s85 0
+!s101 -O0

@@ -3,25 +3,20 @@ module testbench11();
 
 reg clk;
 reg n_rst;
-reg [7:0] rx_data;
-reg rx_valid;
 
-wire [3:0] dtype;
-wire [4:0] operator;
-wire [15:0] src1;
-wire [15:0] src2;
-wire parser_done;
+reg alu_done;
+reg [31:0] calc_res;
+
+wire [7:0] tx_data;
+wire uout_valid;
 
 encoder u_encoder(
     .clk(clk),
     .n_rst(n_rst),
-    .rx_data(rx_data),
-    .rx_valid(rx_valid),
-    .dtype(dtype),
-    .operator(operator),
-    .src1(src1),
-    .src2(src2),
-    .parser_done(parser_done)
+    .alu_done(alu_done),
+    .calc_res(calc_res),
+    .tx_data(tx_data),
+    .uout_valid(uout_valid)
 );
 
 initial begin
@@ -33,92 +28,13 @@ end
 always #5 clk = ~clk;
 
 initial begin
-    rx_valid = 1'b0;
-    rx_data = 1'b0;
+    alu_done = 1'b0;
+    calc_res = 32'h00000000;
     #21;
 
-    rx_valid = 1'b1;
-    rx_data = 8'h49; //I
-    #10;
-    rx_valid = 1'b0;
-    #21;
-    rx_valid = 1'b1;
-    rx_data = 8'h20;
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h53; //S
-    #10;
-    rx_valid = 1'b0;
-    #21;
-    rx_valid = 1'b1;
-    rx_data = 8'h20;
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h31; //1
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h32; //2
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h33; //3
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h34; //4
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h2D; //+
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-
-    rx_valid = 1'b1;
-    rx_data = 8'h35; //5
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h36; //6
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h37; //7
-    #10;
-    rx_valid = 1'b0;
-    #21;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h38; //8
-    #10;
-    rx_valid = 1'b0;
-    #25;
-
-    rx_valid = 1'b1;
-    rx_data = 8'h3D; //=
-    #10;
-    rx_valid = 1'b0;
-    #300;
+    alu_done = 1'b1;
+    calc_res = 32'h123f5a78;
+    #1000
 
     $stop;
 
