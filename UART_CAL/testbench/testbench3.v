@@ -31,7 +31,7 @@ initial begin
     uout_valid = 1'b0;
     tx_data = 8'b00000000;
     #40;
-    tx_data = 8'b01010101;
+    tx_data = 8'b10101011;
     uout_valid = 1'b1;
     #3000;
     uout_valid = 1'b0;

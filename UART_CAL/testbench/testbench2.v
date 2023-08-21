@@ -6,8 +6,10 @@ reg n_rst;
 
 reg rxd;
 reg rx_start;
+
 wire [7:0] rx_data;
 wire rx_valid;
+
 
 rx u_rx(
     .clk(clk),
@@ -32,23 +34,23 @@ initial begin
     #21;
 
     rx_start = 1'b1;
-    #160;
+    #150;
     rxd = 1'b1;
-    #160;
+    #150;
     rxd = 1'b0;
-    #160;
+    #150;
     rxd = 1'b1;
-    #160;
+    #150;
     rxd = 1'b0;
-    #160;
+    #150;
     rxd = 1'b1;
-    #160;
+    #150;
     rxd = 1'b0;
-    #160;
+    #150;
     rxd = 1'b1;
-    #160;
+    #150;
     rxd = 1'b0;
-    #160;
+    #150;
     rx_start = 1'b0;
     #300;
     $stop;

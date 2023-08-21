@@ -67,7 +67,7 @@ end
 
 assign rxen = (cnt == 4'hf)? 1'b1 : 1'b0;
 
-/*
+
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt2 <= 4'h0;
@@ -79,10 +79,11 @@ always @ (posedge clk or negedge n_rst) begin
         cnt2 <= cnt2;
     end
 end
-*/
+
 
 //cnt <= (rxen)?cnt+1:cnt;
 
+/*
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt2 <= 4'h0;
@@ -94,13 +95,14 @@ always @ (posedge clk or negedge n_rst) begin
         cnt2 <= cnt2;
     end
 end
+*/
 
 always @ (*) begin
     case(c_state) 
         IDLE : n_state = (rx_start == 1'b1) ? DATA : c_state;
         //START : n_state = (cnt2 == 4'h0) ? DATA : c_state;
         DATA : n_state = (cnt2 == 4'h8) ? STOP : c_state;
-        STOP : n_state = IDLE; //(cnt2 == 4'h0) ? IDLE : c_state;
+        STOP : n_state = (cnt2 == 4'h0) ? IDLE : c_state;
     endcase
 end
 
