@@ -1,7 +1,7 @@
 module rx (
     clk,
     n_rst,
-    rx_start,
+    //rx_start,
     rxd,
     rx_data,
     rx_valid    
@@ -9,8 +9,10 @@ module rx (
 
 input clk;
 input n_rst;
-input rx_start; 
+//input rx_start; 
 input rxd;
+
+wire rx_start;
 
 wire rxen; // speed
 
@@ -30,6 +32,8 @@ reg [1:0] n_state;
 reg [3:0] cnt; //rxen
 reg [3:0] cnt2;
 
+
+
 always@(posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         c_state <= IDLE;
@@ -38,6 +42,8 @@ always@(posedge clk or negedge n_rst) begin
         c_state <= n_state;
     end
 end
+
+assign rx_start = ((rxd == 1'b0) && (rxen == 1'b1) && (c_state == IDLE)) ? 1'b1 : 1'b0; 
 
 /*
 always @ (posedge clk or negedge n_rst) begin
@@ -57,11 +63,8 @@ always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt <= 4'h0;
     end
-    else if (rx_start == 1'b1) begin
-        cnt <= (cnt == 4'hf) ? 4'h0 : cnt + 4'h1;
-    end
     else begin
-        cnt <= cnt;
+        cnt <= (cnt == 4'hf) ? 4'h0 : cnt + 4'h1;
     end
 end
 
@@ -96,6 +99,7 @@ always @ (posedge clk or negedge n_rst) begin
     end
 end
 */
+
 
 always @ (*) begin
     case(c_state) 

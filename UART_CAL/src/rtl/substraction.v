@@ -17,6 +17,19 @@ input parser_done;
 output substraction_done; 
 output reg [31:0] calc_res;
 
+reg d1,d2;
+always@(posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        d1 <= 1'b0;
+        d2 <= 1'b0;
+    end
+    else begin
+        d1 <= parser_done;
+        d2 <= d1;
+    end
+end
+wire edge_start = (d1 && !d2) ? 1'b1: 1'b0;
+
 localparam IDLE = 2'h0;
 localparam DATA = 2'h1;
 localparam STOP = 2'h2;
@@ -35,7 +48,7 @@ end
 
 always @ (*) begin
     case(c_state) 
-        IDLE : n_state = (parser_done == 1'b1) ? DATA : c_state;
+        IDLE : n_state = (edge_start == 1'b1) ? DATA : c_state;
         DATA : n_state = STOP;
         STOP : n_state = IDLE;
         default : n_state = IDLE;

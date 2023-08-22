@@ -1,6 +1,5 @@
 ../src/rtl/tx.v
 ../src/rtl/rx.v
-//../src/rtl/rx22.v
 ../src/rtl/uart.v
 ../src/rtl/decoder.v
 ../src/rtl/encoder.v
@@ -12,10 +11,9 @@
 ../src/rtl/divider.v
 ../src/rtl/top.v
 //../testbench/testbench.v //uart
-//../testbench/testbench2.v // rx 
-//../testbench/testbench22.v //rx22
+//../testbench/testbench2.v 
 //../testbench/testbench3.v
-//../testbench/testbench4.v //decoder
+//../testbench/testbench4.v 
 //../testbench/testbench5.v //alu
 //../testbench/testbench6.v //add
 //../testbench/testbench7.v //sub

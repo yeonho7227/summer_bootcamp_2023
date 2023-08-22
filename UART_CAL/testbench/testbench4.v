@@ -17,6 +17,7 @@ decoder u_decoder(
     .n_rst(n_rst),
     .rx_data(rx_data),
     .rx_valid(rx_valid),
+    
     .dtype(dtype),
     .operator(operator),
     .src1(src1),
@@ -34,7 +35,7 @@ always #5 clk = ~clk;
 
 initial begin
     rx_valid = 1'b0;
-    rx_data = 1'b0;
+    rx_data = 8'h00;
     #21;
 
     rx_valid = 1'b1;
@@ -42,7 +43,8 @@ initial begin
     #10;
     rx_valid = 1'b0;
     #21;
-    rx_valid = 1'b1;
+
+    rx_valid = 1'b1; //space
     rx_data = 8'h20;
     #10;
     rx_valid = 1'b0;
@@ -53,7 +55,8 @@ initial begin
     #10;
     rx_valid = 1'b0;
     #21;
-    rx_valid = 1'b1;
+
+    rx_valid = 1'b1; //space
     rx_data = 8'h20;
     #10;
     rx_valid = 1'b0;

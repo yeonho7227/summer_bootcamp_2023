@@ -4,7 +4,6 @@ module uart (
     rxd,
     rx_data,
     rx_valid,
-    rx_start,
 
     txd,
     tx_data,
@@ -16,7 +15,7 @@ input clk;
 input n_rst;
 
 input rxd;
-input rx_start;
+
 output [7:0] rx_data;
 output rx_valid;
 
@@ -26,11 +25,10 @@ input [7:0] tx_data;
 input uout_valid;
 
 
-rx u_rx (
+rx u_rx(
     .clk(clk),
     .n_rst(n_rst),
 
-    .rx_start(rx_start),
     .rxd(rxd),
     .rx_data(rx_data),
     .rx_valid(rx_valid)    

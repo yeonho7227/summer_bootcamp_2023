@@ -43,12 +43,13 @@ always@(posedge clk or negedge n_rst)
     else
         c_state <= n_state;
 
+/*
 always@(*) begin
     case(c_state) 
         IDLE : n_state = (rx_valid == 1'b1) ? FORMAT : c_state;
         FORMAT : n_state = ((rx_valid == 1'b1) && (rx_data == 8'h20)) ? TYPE : c_state;
         TYPE : n_state = ((rx_valid == 1'b1) && (rx_data == 8'h20)) ? DATA1 : c_state;
-        DATA1 : n_state = ((rx_valid == 1'b1) && (cnt == 4'h4)) ? OPERATION : c_state;
+        DATA1 : n_state = ((rx_valid == 1'b1) && (cnt == 4'h3)) ? OPERATION : c_state;
         OPERATION : n_state = (rx_valid == 1'b1) ? DATA2 : c_state;
         DATA2 : n_state = ((rx_data == 8'h3D) && (rx_valid == 1'b1)) ? RESULT: c_state;
         //END_PROTOCOL : n_state = (rx_valid == 1'b1) ? RESULT : c_state;
@@ -56,19 +57,23 @@ always@(*) begin
         default : n_state = (rx_valid == 1'b1) ? FORMAT : c_state;
     endcase 
 end
-
-//((rx_data == 8'h3D) && (rx_valid == 1'b1))
-
-/*
-IDLE : n_state = (rx_data)
-FORMAT : n_state = (rx_data = 8'h20)? TYPE :c_state;
-TYPE :
-
-if (c_state == FORMAT)
-    if (rx_data == 8'h49)
-        format <= 1'b1;
-
 */
+
+always@(*) begin
+    case(c_state) 
+        IDLE : n_state = (rx_valid == 1'b1) ? FORMAT : c_state;
+        FORMAT : n_state = ((rx_valid == 1'b1) && (rx_data == 8'h20)) ? TYPE : c_state;
+        TYPE : n_state = ((rx_valid == 1'b1) && (rx_data == 8'h20)) ? DATA1 : c_state;
+        DATA1 : n_state = ((rx_valid == 1'b1) && (cnt == 4'h3)) ? OPERATION : c_state;
+        OPERATION : n_state = (rx_valid == 1'b1) ? DATA2 : c_state;
+        DATA2 : n_state = ((cnt2 == 4'h3) && (rx_valid == 1'b1)) ? END_PROTOCOL: c_state;
+        END_PROTOCOL : n_state = (rx_valid == 1'b1) ? RESULT : c_state; //((rx_data == 8'h3D) && (rx_valid == 1'b1)) ? RESULT : c_state;
+        RESULT : n_state = IDLE;
+        default : n_state = (rx_valid == 1'b1) ? FORMAT : c_state;
+    endcase 
+end
+
+
 
 reg format_q;
 always@(posedge clk or negedge n_rst) begin
@@ -147,13 +152,15 @@ always @ (posedge clk or negedge n_rst) begin
     end
 end
 
+
+
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt <= 4'h0;
         src1 <= 16'h0000;
     end
     else if ((c_state == DATA1) && (rx_valid == 1'b1)) begin
-        cnt <= (cnt == 4'h4) ? 4'h0 : (rx_valid == 1'b1) ? cnt + 4'h1 : cnt;
+        cnt <= (cnt == 4'h3) ? 4'h0 : (rx_valid == 1'b1) ? cnt + 4'h1 : cnt;
         src1 <= {src1[11:0], src1_q[3:0]}; 
     end
     else begin
@@ -161,6 +168,24 @@ always @ (posedge clk or negedge n_rst) begin
         src1 <= src1;
     end
 end
+
+
+/*
+always @ (posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        cnt <= 4'h0;
+        src1 <= 16'h0000;
+    end
+    else if (c_state == DATA1) begin
+        cnt <= (cnt == 4'h4) ? 4'h0 : cnt + 4'h1;
+        src1 <= {src1[11:0], src1_q[3:0]}; 
+    end
+    else begin
+        cnt <= cnt;
+        src1 <= src1;
+    end
+end
+*/
 
 
 reg [15:0] src2_q; 
@@ -207,13 +232,14 @@ always @ (posedge clk or negedge n_rst) begin
     end
 end
 
+
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt2 <= 4'h0;
         src2 <= 16'h0000;
     end
     else if ((c_state == DATA2) && (rx_valid == 1'b1)) begin
-        cnt2 <= (cnt2 == 4'h4) ? 4'h0 : (rx_valid == 1'b1) ? cnt2 + 4'h1 : cnt2; 
+        cnt2 <= (cnt2 == 4'h3) ? 4'h0 : (rx_valid == 1'b1) ? cnt2 + 4'h1 : cnt2; 
         src2 <= {src2[11:0], src2_q[3:0]}; 
     end
     else begin
@@ -221,6 +247,24 @@ always @ (posedge clk or negedge n_rst) begin
         src2 <= src2;
     end
 end
+
+
+/*
+always @ (posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        cnt2 <= 4'h0;
+        src2 <= 16'h0000;
+    end
+    else if (c_state == DATA2) begin
+        cnt2 <= (cnt2 == 4'h4) ? 4'h0 : cnt2 + 4'h1;
+        src2 <= {src2[11:0], src2_q[3:0]}; 
+    end
+    else begin
+        cnt2 <= cnt2;
+        src2 <= src2;
+    end
+end
+*/
 
 reg [4:0] operator_q;
 always@(posedge clk or negedge n_rst) begin
@@ -244,41 +288,26 @@ end
 assign operator = operator_q;
 
 
-/*
-reg parser_done_q;
+reg END_PROTOCOL_q;
 always@(posedge clk or negedge n_rst) begin
     if (!n_rst) begin
-        parser_done_q <= 1'h0;
+        END_PROTOCOL_q <= 1'h0;
     end
-    else if (c_state == RESULT) begin
+    else if (c_state == END_PROTOCOL) begin
         if (rx_data == 8'h3D)
-            parser_done_q <= 1'b1;
-        else if (parser_done_q == 1'b1)
-            parser_done_q = 1'b0;
-        else 
-            parser_done_q <= 1'b0;
-    end
-end
-*/
-
-assign parser_done = (c_state == RESULT) ? 1'b1 : 1'b0;
-
-
-/*
-reg parser_done_q;
-always@(posedge clk or negedge n_rst) begin
-    if(!n_rst) begin
-        parser_done_q <= 1'b0;
-    end
-    else if (c_state == RESULT) begin
-        parser_done_q <= 1'b1;
-    end
+            END_PROTOCOL_q <= 1'b1;
+        end 
     else begin
-        parser_done_q <= parser_done_q;
+        END_PROTOCOL_q <= 1'b0;
     end
 end
-assign parser_done = parser_done_q;
-*/
+
+
+
+assign parser_done = ((c_state == RESULT) && (rx_data ==8'h3D)) ? 1'b1 : 1'b0;
+
+
+
 
 endmodule
 

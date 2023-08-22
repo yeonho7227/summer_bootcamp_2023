@@ -115,7 +115,7 @@ always @(posedge clk or negedge n_rst) begin
         start_signdivider <= 1'b0;
     end
 end
-*/
+
 
 always @(*) begin
     if ((calc_res_q == 4'h1) || (calc_res_q == 4'h5)) begin
@@ -175,6 +175,7 @@ always @(*) begin
         start_signdivider = 1'b0;
     end
 end
+*/
 
 
 always @(posedge clk or negedge n_rst) begin
@@ -222,7 +223,7 @@ add u_add(
     .src2(src2),
     .add_done(add_done),
     .calc_res(calc_res_add),
-    .parser_done(start_add)
+    .parser_done(parser_done)
 );
 
 substraction u_substraction(
@@ -232,7 +233,7 @@ substraction u_substraction(
     .src2(src2),
     .substraction_done(substraction_done),
     .calc_res(calc_res_substraction),
-    .parser_done(start_substraction)
+    .parser_done(parser_done)
 );
 
 shift_add_multi u_shift_add_multi (
@@ -337,8 +338,13 @@ always @(*) begin
 end
 
 
-assign alu_done = ((add_done_q == 1'b1) || (substraction_done_q == 1'b1) || (multi_done_q == 1'b1) 
-                    || (booth_done_q == 1'b1) || (divider_done_q == 1'b1) ) ? 1'b1 : 1'b0;
+/*
+assign alu_done = (((add_done_q == 1'b1) || (substraction_done_q == 1'b1) || (multi_done_q == 1'b1) 
+                    || (booth_done_q == 1'b1) || (divider_done_q == 1'b1))) ? 1'b1 : 1'b0;
+*/
+
+assign alu_done = (((add_done == 1'b1) || (substraction_done == 1'b1) || (multi_done == 1'b1) 
+                    || (booth_done == 1'b1) || (divider_done == 1'b1))) ? 1'b1 : 1'b0;
 
 
 endmodule

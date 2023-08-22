@@ -2,7 +2,6 @@ module top(
     clk,
     n_rst,
     rxd,
-    rx_start,
     txd,
     tx_valid
 );
@@ -10,7 +9,6 @@ module top(
 input clk;
 input n_rst;
 input rxd;
-input rx_start;
 
 output txd;
 output tx_valid;
@@ -35,7 +33,6 @@ uart u_uart (
     .rxd(rxd),
     .rx_data(rx_data),
     .rx_valid(rx_valid),
-    .rx_start(rx_start),
 
     .txd(txd),
     .tx_data(tx_data),
@@ -55,6 +52,7 @@ decoder u_decoder(
     .parser_done(parser_done)
 );
 
+
 alu u_alu (
     .clk(clk),
     .n_rst(n_rst),
@@ -67,6 +65,7 @@ alu u_alu (
     .calc_res(calc_res)
 );
 
+/*
 encoder u_encoder(
     .clk(clk),
     .n_rst(n_rst),
@@ -75,5 +74,6 @@ encoder u_encoder(
     .tx_data(tx_data),
     .uout_valid(uout_valid)
 );
+*/
 
 endmodule
