@@ -2,8 +2,8 @@ module top(
     clk,
     n_rst,
     rxd,
-    txd,
-    tx_valid
+    txd
+    //tx_valid
 );
 
 input clk;
@@ -11,13 +11,13 @@ input n_rst;
 input rxd;
 
 output txd;
-output tx_valid;
+wire tx_valid;
 
 wire [7:0] rx_data;
 wire rx_valid;
 
 wire [7:0] tx_data;
-wire uout_valid;
+//wire uout_valid;
 
 wire [3:0] dtype;
 wire [4:0] operator;
@@ -26,6 +26,8 @@ wire [15:0] src2;
 wire parser_done;
 wire alu_done;
 wire [31:0] calc_res;
+wire ener;
+wire uout_control;
 
 uart u_uart (
     .clk(clk),
@@ -37,7 +39,7 @@ uart u_uart (
     .txd(txd),
     .tx_data(tx_data),
     .tx_valid(tx_valid),
-    .uout_valid(uout_valid)
+    .uout_valid(ener)
 );
 
 decoder u_decoder(
@@ -65,15 +67,16 @@ alu u_alu (
     .calc_res(calc_res)
 );
 
-/*
+
 encoder u_encoder(
     .clk(clk),
     .n_rst(n_rst),
     .alu_done(alu_done),
     .calc_res(calc_res),
     .tx_data(tx_data),
-    .uout_valid(uout_valid)
+    .uout_control(uout_control),
+    .ener(ener)
 );
-*/
+
 
 endmodule

@@ -21,6 +21,7 @@ output rx_valid;
 
 output txd;
 output tx_valid;
+
 input [7:0] tx_data;
 input uout_valid;
 

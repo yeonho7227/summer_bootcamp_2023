@@ -24,6 +24,19 @@ reg [15:0] cnt;
 reg q0;
 reg [15:0] A;
 
+reg d1,d2;
+always@(posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        d1 <= 1'b0;
+        d2 <= 1'b0;
+    end
+    else begin
+        d1 <= parser_done;
+        d2 <= d1;
+    end
+end
+wire edge_start = (d1 && !d2) ? 1'b1: 1'b0;
+
 
 localparam IDLE = 2'h0;
 localparam DATA = 2'h1;
@@ -56,7 +69,7 @@ end
 
 always @ (*) begin
     case(c_state) 
-        IDLE : n_state = (parser_done == 1'b1) ? DATA : c_state;
+        IDLE : n_state = (edge_start == 1'b1) ? DATA : c_state;
         DATA: n_state =  (cnt == 16'h0010) ? STOP : c_state;
         STOP : n_state = IDLE;
         default : n_state = IDLE;
@@ -75,7 +88,7 @@ always@(posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         A <= 16'h0000;
         q0 <= 1'b0;
-        cnt <= 16'h0000;
+        //cnt <= 16'h0000;
         calc_res <= 32'h00000000;
         sum_Q <= 16'h0000;
     end

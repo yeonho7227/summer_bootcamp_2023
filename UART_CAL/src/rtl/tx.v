@@ -11,6 +11,8 @@ input clk;
 input n_rst;
 
 input uout_valid;
+//input uout_control;
+
 input [7:0] tx_data;
 
 output tx_valid;
@@ -28,7 +30,8 @@ localparam STOP = 2'h3;
 reg [1:0] c_state;
 reg [1:0] n_state;    
 
-reg [3:0] cnt; //txen
+reg [15:0] cnt;
+//reg [3:0] cnt; //txen
 reg [3:0] cnt2;
 
 always @ (posedge clk or negedge n_rst)
@@ -55,24 +58,24 @@ end
 
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
-        cnt <= 4'h0;
+        cnt <= 16'h0000;
     end
-    else if (uout_valid == 1'b1) begin
-        cnt <= (cnt == 4'hf) ? 4'h0 : cnt + 4'h1;
+    else if (c_state != IDLE) begin
+        cnt <= (cnt == 16'h1B2) ? 16'h0000 : cnt + 16'h0001;
     end
     else begin
         cnt <= cnt;
     end
 end
 
-assign txen = (cnt == 4'hf)? 1'b1 : 1'b0;
+assign txen = (cnt == 16'h1B2)? 1'b1 : 1'b0;
 
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         cnt2 <= 4'h0;
     end
     else if  (c_state == DATA) begin
-        cnt2 <= (cnt2 == 4'h8) ? 4'h0 : (txen == 1'b1) ? cnt2 + 4'h1 : cnt2;
+        cnt2 <= (cnt2 == 4'h9) ? 4'h0 : (txen == 1'b1) ? cnt2 + 4'h1 : cnt2;
     end
     else begin
         cnt2 <= cnt2;
@@ -83,7 +86,7 @@ always @ (*) begin
     case(c_state) 
         IDLE : n_state = (uout_valid  == 1'b1) ? START : c_state;
         START : n_state = (cnt2 == 4'h0) ? DATA : c_state;
-        DATA : n_state = (cnt2 == 4'h8) ? STOP : c_state;
+        DATA : n_state = (cnt2 == 4'h9) ? STOP : c_state;
         STOP : n_state = (cnt2 == 4'h0) ? IDLE : c_state;
         default : n_state = IDLE;
     endcase

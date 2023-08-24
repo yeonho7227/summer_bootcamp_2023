@@ -1,0 +1,72 @@
+
+State Machine - |top|encoder:u_encoder|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 
+
+State Machine - |top|alu:u_alu|calc_res_q
+Name calc_res_q.0111 calc_res_q.0110 calc_res_q.0101 calc_res_q.0100 calc_res_q.0011 calc_res_q.0010 calc_res_q.0001 calc_res_q.0000 calc_res_q.1000 
+calc_res_q.0000 0 0 0 0 0 0 0 0 0 
+calc_res_q.0001 0 0 0 0 0 0 1 1 0 
+calc_res_q.0010 0 0 0 0 0 1 0 1 0 
+calc_res_q.0011 0 0 0 0 1 0 0 1 0 
+calc_res_q.0100 0 0 0 1 0 0 0 1 0 
+calc_res_q.0101 0 0 1 0 0 0 0 1 0 
+calc_res_q.0110 0 1 0 0 0 0 0 1 0 
+calc_res_q.0111 1 0 0 0 0 0 0 1 0 
+calc_res_q.1000 0 0 0 0 0 0 0 1 1 
+
+State Machine - |top|alu:u_alu|divider:u_divider|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 
+
+State Machine - |top|alu:u_alu|booth:u_booth|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 
+
+State Machine - |top|alu:u_alu|shift_add_multi:u_shift_add_multi|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 
+
+State Machine - |top|alu:u_alu|substraction:u_substraction|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 
+
+State Machine - |top|alu:u_alu|add:u_add|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 
+
+State Machine - |top|decoder:u_decoder|c_state
+Name c_state.RESULT c_state.END_PROTOCOL c_state.DATA2 c_state.OPERATION c_state.DATA1 c_state.TYPE c_state.FORMAT c_state.IDLE 
+c_state.IDLE 0 0 0 0 0 0 0 0 
+c_state.FORMAT 0 0 0 0 0 0 1 1 
+c_state.TYPE 0 0 0 0 0 1 0 1 
+c_state.DATA1 0 0 0 0 1 0 0 1 
+c_state.OPERATION 0 0 0 1 0 0 0 1 
+c_state.DATA2 0 0 1 0 0 0 0 1 
+c_state.END_PROTOCOL 0 1 0 0 0 0 0 1 
+c_state.RESULT 1 0 0 0 0 0 0 1 
+
+State Machine - |top|uart:u_uart|tx:u_tx|c_state
+Name c_state.STOP c_state.DATA c_state.START c_state.IDLE 
+c_state.IDLE 0 0 0 0 
+c_state.START 0 0 1 1 
+c_state.DATA 0 1 0 1 
+c_state.STOP 1 0 0 1 
+
+State Machine - |top|uart:u_uart|rx:u_rx|c_state
+Name c_state.IDLE c_state.STOP c_state.DATA 
+c_state.IDLE 0 0 0 
+c_state.DATA 1 0 1 
+c_state.STOP 1 1 0 

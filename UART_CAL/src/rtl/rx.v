@@ -1,7 +1,6 @@
 module rx (
     clk,
     n_rst,
-    //rx_start,
     rxd,
     rx_data,
     rx_valid    
@@ -9,7 +8,6 @@ module rx (
 
 input clk;
 input n_rst;
-//input rx_start; 
 input rxd;
 
 wire rx_start;
@@ -28,8 +26,8 @@ parameter CNTEND = 16'h1B2; //115200 BaudRate / 50MHz
 reg [1:0] c_state;
 reg [1:0] n_state;
 
-//reg [16:0] cnt;
-reg [3:0] cnt; //rxen
+reg [15:0] cnt;
+//reg [3:0] cnt; //rxen
 reg [3:0] cnt2;
 
 
@@ -61,14 +59,14 @@ end
 
 always @ (posedge clk or negedge n_rst) begin
     if(!n_rst) begin
-        cnt <= 4'h0;
+        cnt <= 16'h0000;
     end
     else begin
-        cnt <= (cnt == 4'hf) ? 4'h0 : cnt + 4'h1;
+        cnt <= (cnt == 16'h1B2) ? 16'h0000 : cnt + 16'h0001;
     end
 end
 
-assign rxen = (cnt == 4'hf)? 1'b1 : 1'b0;
+assign rxen = (cnt == 16'h1B2)? 1'b1 : 1'b0;
 
 
 always @ (posedge clk or negedge n_rst) begin

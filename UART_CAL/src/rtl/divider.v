@@ -25,6 +25,19 @@ reg [4:0] cnt;
 reg [16:0] A; // 5bit A
 reg [15:0] sum_Q; // 4bit sum_Q
 
+reg d1,d2;
+always@(posedge clk or negedge n_rst) begin
+    if(!n_rst) begin
+        d1 <= 1'b0;
+        d2 <= 1'b0;
+    end
+    else begin
+        d1 <= parser_done;
+        d2 <= d1;
+    end
+end
+wire edge_start = (d1 && !d2) ? 1'b1: 1'b0;
+
 localparam IDLE = 2'h0;
 localparam DATA = 2'h1;
 localparam STOP = 2'h2;
@@ -43,7 +56,7 @@ end
 
 always @ (*) begin
     case(c_state) 
-        IDLE : n_state = (parser_done == 1'b1) ? DATA : c_state;
+        IDLE : n_state = (edge_start == 1'b1) ? DATA : c_state;
         DATA: n_state =  (cnt == 5'h10) ? STOP : c_state;
         STOP : n_state = IDLE;
         default : n_state = IDLE;
@@ -77,7 +90,7 @@ assign Q_resert = (A_resert[16] == 1'b1) ? {Q_shift[15:1],1'b0} : {Q_shift[15:1]
 always@(posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         A <= 17'h00000;
-        cnt <= 5'h00;
+        //cnt <= 5'h00;
         R_product <= 17'h00000;
         sum_Q <= 16'h0000;
         Q_product <= 16'h0000;

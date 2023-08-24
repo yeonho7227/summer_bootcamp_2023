@@ -7,7 +7,7 @@ module alu (
     src2,
     parser_done,
     alu_done,
-    calc_res,
+    calc_res
 );
 
 input clk;
@@ -38,7 +38,7 @@ wire booth_done;
 wire divider_done;
 wire signdivider_done;
 
-
+/*
 reg start_add;
 reg start_substraction;
 reg start_multi;
@@ -46,16 +46,13 @@ reg start_booth;
 reg start_divider;
 reg start_signdivider;
 
-/*
 wire start_add;
 wire start_substraction;
 wire start_multi;
 wire start_booth;
 wire start_divider;
 wire start_signdivider;
-*/
 
-/*
 always @(posedge clk or negedge n_rst) begin
     if(!n_rst) begin
         start_add <= 1'b0;
@@ -115,7 +112,6 @@ always @(posedge clk or negedge n_rst) begin
         start_signdivider <= 1'b0;
     end
 end
-
 
 always @(*) begin
     if ((calc_res_q == 4'h1) || (calc_res_q == 4'h5)) begin
@@ -216,14 +212,21 @@ wire [31:0] calc_res_booth;
 wire [31:0] calc_res_divider;
 wire [31:0] calc_res_signdivider;
 
+wire alu_add_done;
+wire alu_sub_done;
+wire alu_multi_done;
+wire alu_booth_done;
+wire alu_divider_done;
+wire alu_signdivider_done;
+
 add u_add(
     .clk(clk),
     .n_rst(n_rst),
     .src1(src1),
     .src2(src2),
-    .add_done(add_done),
     .calc_res(calc_res_add),
-    .parser_done(parser_done)
+    .parser_done(parser_done),
+    .add_done(add_done)
 );
 
 substraction u_substraction(
@@ -231,9 +234,9 @@ substraction u_substraction(
     .n_rst(n_rst),
     .src1(src1),
     .src2(src2),
-    .substraction_done(substraction_done),
     .calc_res(calc_res_substraction),
-    .parser_done(parser_done)
+    .parser_done(parser_done),
+    .substraction_done(substraction_done)
 );
 
 shift_add_multi u_shift_add_multi (
@@ -242,7 +245,7 @@ shift_add_multi u_shift_add_multi (
     .src2(src2),
     .src1(src1),
     .calc_res(calc_res_multi),
-    .parser_done(start_multi),
+    .parser_done(parser_done),
     .multi_done(multi_done)
 );
 
@@ -253,9 +256,10 @@ booth u_booth(
     .src2(src2),
     .src1(src1),
     .calc_res(calc_res_booth),
-    .parser_done(start_booth),
+    .parser_done(parser_done),
     .booth_done(booth_done)
 );
+
 
 divider u_divider(
     .clk(clk),
@@ -264,9 +268,44 @@ divider u_divider(
     .M(src2),
     .Q_product(calc_res_divider[31:16]),
     .R_product(calc_res_divider[15:0]),
-    .parser_done(start_divider),
+    .parser_done(parser_done),
     .divider_done(divider_done)
 );
+
+
+assign alu_done = (((calc_res_q == 4'h1) || (calc_res_q == 4'h5)) && (add_done == 1'b1)) ? 1'b1 :
+                (((calc_res_q == 4'h2) || (calc_res_q == 4'h6)) && (substraction_done == 1'b1)) ? 1'b1 :
+                ((calc_res_q == 4'h3) && (booth_done == 1'b1)) ? 1'b1 :
+                ((calc_res_q == 4'h4) && (signdivider_done == 1'b1)) ? 1'b1 : 
+                ((calc_res_q == 4'h7) && (multi_done == 1'b1)) ? 1'b1 :
+                ((calc_res_q == 4'h8) && (divider_done == 1'b1)) ? 1'b1 : 1'b0;
+
+/*
+else if ((dtype == 4'h1) && (operator == 5'h01) && (parser_done == 1'b1)) begin 
+        calc_res_q <= 4'h1; //s +
+    end
+    else if ((dtype == 4'h1) && (operator == 5'h02) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h2; //s -
+    end
+    else if ((dtype == 4'h1) && (operator == 5'h03) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h3; //s *
+    end
+    else if ((dtype == 4'h1) && (operator == 5'h04) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h4; //s /
+    end
+    else if ((dtype == 4'h2) && (operator == 5'h01) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h5; //u +
+    end
+    else if ((dtype == 4'h2) && (operator == 5'h02) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h6; //u -
+    end
+    else if ((dtype == 4'h2) && (operator == 5'h03) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h7; //u *
+    end
+    else if ((dtype == 4'h2) && (operator == 5'h04) && (parser_done == 1'b1)) begin
+        calc_res_q <= 4'h8; //u /
+    end
+*/
 
 
 assign calc_res = (((calc_res_q == 4'h1) || (calc_res_q == 4'h5)) && (alu_done == 1'b1)) ? calc_res_add :
@@ -343,8 +382,8 @@ assign alu_done = (((add_done_q == 1'b1) || (substraction_done_q == 1'b1) || (mu
                     || (booth_done_q == 1'b1) || (divider_done_q == 1'b1))) ? 1'b1 : 1'b0;
 */
 
-assign alu_done = (((add_done == 1'b1) || (substraction_done == 1'b1) || (multi_done == 1'b1) 
-                    || (booth_done == 1'b1) || (divider_done == 1'b1))) ? 1'b1 : 1'b0;
+
+
 
 
 endmodule

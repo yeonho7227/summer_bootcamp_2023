@@ -302,12 +302,7 @@ always@(posedge clk or negedge n_rst) begin
     end
 end
 
-
-
 assign parser_done = ((c_state == RESULT) && (rx_data ==8'h3D)) ? 1'b1 : 1'b0;
-
-
-
 
 endmodule
 

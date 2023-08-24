@@ -7,6 +7,8 @@ entity encoder is
         alu_done        : in     vl_logic;
         calc_res        : in     vl_logic_vector(31 downto 0);
         tx_data         : out    vl_logic_vector(7 downto 0);
-        uout_valid      : out    vl_logic
+        uout_control    : out    vl_logic;
+        ener            : out    vl_logic;
+        parser_done     : in     vl_logic
     );
 end encoder;
